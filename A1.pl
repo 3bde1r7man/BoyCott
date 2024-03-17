@@ -15,6 +15,13 @@ list_orders(CustomerID, AccList, List) :-
 list_orders(_, List, List). % if the customer has no more orders, return the list
 
 
+member(X, [X|_]).
+member(X, [_|Tail]):-
+    member(X, Tail).
+
+append([], L, L).
+append([H|T], L, [H|R]):-
+    append(T, L, R).
 
 
 
