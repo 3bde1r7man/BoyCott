@@ -25,6 +25,13 @@ append([H|T], L, [H|R]):-
     append(T, L, R).
 
 
+% return if this item or this company is boycotted or not
+isBoycott(Companyname):-
+    boycott_company(Companyname,_).
+
+% prints justification of why we need to boycott this company
+whyToBoycott(Companyname,Justification):-
+    boycott_company(Companyname,Justification).
 
 
 
