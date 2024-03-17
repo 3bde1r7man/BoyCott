@@ -14,11 +14,12 @@ list_orders(CustomerID, AccList, List) :-
     
 list_orders(_, List, List). % if the customer has no more orders, return the list
 
-
-member(X, [X|_]).
+% member(X, L) is true if X is a member of list L
+member(X, [X|_]). 
 member(X, [_|Tail]):-
     member(X, Tail).
 
+% append(L1, L2, L3) is true if L3 is the result of appending L2 to L1
 append([], L, L).
 append([H|T], L, [H|R]):-
     append(T, L, R).
