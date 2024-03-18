@@ -1,3 +1,6 @@
+% include the data file
+:-consult(data).
+
 % my_length(L, N) is true if N is the number of elements in list L
 my_length([], 0).
 my_length([_|T], N) :-
