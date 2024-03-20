@@ -53,10 +53,16 @@ getNumOfItems(Customer, OrderID, Count) :-
 % return if this item or this company is boycotted or not
 isBoycott(Companyname):-
     boycott_company(Companyname,_).
+isBoycott(Item):-
+    item(Item, Companyname, _), boycott_company(Companyname,_).
 
 % prints justification of why we need to boycott this company
 whyToBoycott(Companyname,Justification):-
     boycott_company(Companyname,Justification).
+
+whyToBoycott(Item,Justification):-
+    item(Item, Companyname, _),boycott_company(Companyname,Justification).
+
 
 
 
