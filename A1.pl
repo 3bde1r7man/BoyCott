@@ -37,7 +37,6 @@ countOrdersOfCustomer(Customer, Count) :-
     list_orders(Customer, List), % get the list of orders
     my_length(List, Count). % get the length of the list
 
-
 % List all items in a specific customer order given customer Name and order id.
 getItemsInOrderById(Customer, OrderID, Items) :-
     customer(CustomerID, Customer), % get the customer id
@@ -48,6 +47,18 @@ getItemsInOrderById(Customer, OrderID, Items) :-
 getNumOfItems(Customer, OrderID, Count) :-
     getItemsInOrderById(Customer, OrderID, Items), % get the items in the order
     my_length(Items, Count). % get the length of the items list
+
+% Calculate the price of a given order given Customer Name and order id
+calcPriceOfOrder(Customer, OrderID, TotalPrice) :-
+    getItemsInOrderById(Customer, OrderID, Items), % get the items in the order
+    calcPriceOfItems(Items, TotalPrice). % calculate the price of the items
+
+% Calculate the price of a given list of items
+calcPriceOfItems([], 0). % if the list is empty, the price is 0
+calcPriceOfItems([Item|Tail], TotalPrice) :-
+    item(Item, _, Price), % get the price of the item
+    calcPriceOfItems(Tail, NewTotalPrice), % calculate the price of the rest of the items
+    TotalPrice is Price + NewTotalPrice. % add the price of the current item to the total price
 
 
 % return if this item or this company is boycotted or not
