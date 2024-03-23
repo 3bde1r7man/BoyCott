@@ -51,14 +51,13 @@ getNumOfItems(Customer, OrderID, Count) :-
 % Calculate the price of a given order given Customer Name and order id
 calcPriceOfOrder(Customer, OrderID, TotalPrice) :-
     getItemsInOrderById(Customer, OrderID, Items), % get the items in the order
-    calcPriceOfItems(Items, TotalPrice). % calculate the price of the items
+    calcPriceOfItems(Items, 0, TotalPrice). % calculate the price of the items
 
-% Calculate the price of a given list of items
-calcPriceOfItems([], 0). % if the list is empty, the price is 0
-calcPriceOfItems([Item|Tail], TotalPrice) :-
+calcPriceOfItems([], TotalPrice, TotalPrice). % if there are no more items, return the total price
+calcPriceOfItems([Item|Tail], AccPrice, TotalPrice) :-
     item(Item, _, Price), % get the price of the item
-    calcPriceOfItems(Tail, NewTotalPrice), % calculate the price of the rest of the items
-    TotalPrice is Price + NewTotalPrice. % add the price of the current item to the total price
+    NewAccPrice is AccPrice + Price, % add the price to the accumulator
+    calcPriceOfItems(Tail, NewAccPrice, TotalPrice). % continue calculating the price of the rest of the items
 
 
 % return if this item or this company is boycotted or not
