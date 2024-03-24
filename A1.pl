@@ -74,8 +74,7 @@ whyToBoycott(Item,Justification):-
     item(Item, Companyname, _),boycott_company(Companyname,Justification).
 
 
-
-
-
-
-
+% Given an username and order ID, calculate the price of the order after replacing all boycott items by its alternative
+calcPriceAfterReplacingBoycottItemsFromAnOrder(Customer, OrderID, NewList, TotalPrice) :-
+    replaceBoycottItemsFromAnOrder(Customer, OrderID, NewList), % replace the boycott items
+    calcPriceOfItems(NewList, 0, TotalPrice). % calculate the price of the new list
