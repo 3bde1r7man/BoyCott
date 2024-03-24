@@ -17,6 +17,11 @@ my_append([], L, L).
 my_append([H|T], L, [H|R]):-
     my_append(T, L, R).
 
+% my_delete(X, L1, L2) is true if L2 is the result of deleting X from L1
+my_delete(X, [X|Tail], Tail).
+my_delete(X, [Y|Tail], [Y|Tail1]):-
+    my_delete(X, Tail, Tail1).
+
 
 % List all orders of a specific customer (as a list).
 list_orders(Customer, List) :-
