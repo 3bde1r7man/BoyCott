@@ -76,7 +76,9 @@ whyToBoycott(Item,Justification):-
 %Given an username and order ID, remove all the boycott items from this order.
 removeBoycottItems([], []).
 removeBoycottItems([H|T],ListOfNoBoycott):-
-    isBoycott(H),removeBoycottItems(T,ListOfNoBoycott).
+    isBoycott(H),
+    removeBoycottItems(T,ListOfNoBoycott),
+    !.
 removeBoycottItems([H|T],[H|Result]):-
     removeBoycottItems(T,Result).
 
