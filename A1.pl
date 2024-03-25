@@ -85,19 +85,18 @@ removeBoycottItemsFromAnOrder(Customer, OrderID,NewList):-
     removeBoycottItems(Items, NewList).
 
 %Given an username and order ID, update the order such that all boycott items are replaced by an alternative (if exists).
-replaceBoycottItems([], []).%
+replaceBoycottItems([], []).
 replaceBoycottItems([H|T],[Alternative|ListOfAlter] ):-
-    isBoycott(H),alternative(H,Alternative),replaceBoycottItems(T,ListOfAlter),!.
+    isBoycott(H),alternative(H,Alternative),replaceBoycottItems(T,ListOfAlter),!;isBoycott(H),replaceBoycottItems(T,ListOfAlter).    
 
-replaceBoycottItems([H|T], ListOfAlter):-
-    isBoycott(H),replaceBoycottItems(T,ListOfAlter).
-    
 replaceBoycottItems([H|T], [H|ListOfAlter]):-
 	replaceBoycottItems(T, ListOfAlter).
     
 replaceBoycottItemsFromAnOrder(Customer, OrderID,NewList):-
     getItemsInOrderById(Customer, OrderID, Items), % get the items in the order
 	replaceBoycottItems(Items,NewList).
+
+
 
 
 % Given an username and order ID, calculate the price of the order after replacing all boycott items by its alternative
