@@ -20,7 +20,6 @@ my_append([], L, L).
 my_append([H|T], L, [H|R]):-
     my_append(T, L, R).
 
-
 % List all orders of a specific customer (as a list).
 list_orders(Customer, List) :-
     customer(CustomerID, Customer),
@@ -62,7 +61,6 @@ calcPriceOfItems([Item|Tail], AccPrice, TotalPrice) :-
     NewAccPrice is AccPrice + Price, % add the price to the accumulator
     calcPriceOfItems(Tail, NewAccPrice, TotalPrice). % continue calculating the price of the rest of the items
 
-
 % return if this item or this company is boycotted or not
 isBoycott(Companyname):-
     boycott_company(Companyname,_).
@@ -101,9 +99,6 @@ replaceBoycottItemsFromAnOrder(Customer, OrderID,NewList):-
     getItemsInOrderById(Customer, OrderID, Items), % get the items in the order
 	replaceBoycottItems(Items,NewList).
 
-
-
-
 % Given an username and order ID, calculate the price of the order after replacing all boycott items by its alternative
 calcPriceAfterReplacingBoycottItemsFromAnOrder(Customer, OrderID, NewList, TotalPrice) :-
     replaceBoycottItemsFromAnOrder(Customer, OrderID, NewList), % replace the boycott items
@@ -113,8 +108,6 @@ calcPriceAfterReplacingBoycottItemsFromAnOrder(Customer, OrderID, NewList, Total
 getTheDifferenceInPriceBetweenItemAndAlternative(Item,Alternative,DiffPrice):-
     alternative(Item, Alternative),!, item(Item, _, P),
     item(Alternative, _, P1),DiffPrice is P - P1.
-
-
 
 % This function inserts an item in the knowledge base
 add_item(Item, Company, Price) :-
