@@ -115,21 +115,32 @@ getTheDifferenceInPriceBetweenItemAndAlternative(Item,Alternative,DiffPrice):-
     item(Alternative, _, P1),DiffPrice is P - P1.
 
 
-% Insert/Remove (1)item, (2)alternative and (3)new boycott
+
+% This function inserts an item in the knowledge base
 add_item(Item, Company, Price) :-
+    \+item(Item, Company, Price),
     assert(item(Item, Company, Price)).
 
+% This function removes an item from the knowledge base
 remove_item(Item, Company, Price) :-
     retract(item(Item, Company, Price)).
 
-add_alternative(Item, Alt) :-
-    assert(alternative(Item, Alt)).
+% This function inserts an alternative in the knowledge base
+add_alternative(Item, AlternativeItem) :-
+    \+alternative(Item, AlternativeItem),
+    assert(item(Item, AlternativeItem)).
 
-remove_alternative(Item, Alt) :-
-    retract(alternative(Item, Alt)).
+% This function removes an alternative from the knowledge base
+remove_alternative(Item,AlternativeItem) :-
+    retract(alternative(Item, AlternativeItem)).
 
+% This function inserts a boycott company in the knowledge base
 add_boycott_company(Company, Justification) :-
+    \+boycott_company(Company, Justification),
     assert(boycott_company(Company, Justification)).
 
+% This function removes a boycott company from the knowledge base
 remove_boycott_company(Company, Justification) :-
     retract(boycott_company(Company, Justification)).
+
+
