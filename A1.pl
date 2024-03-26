@@ -1,5 +1,8 @@
 % include the data file
 :-consult(data).
+:-dynamic item/3.
+:-dynamic alternative/2.
+:-dynamic boycott_company/2.
 
 % my_length(L, N) is true if N is the number of elements in list L
 my_length([], 0).
@@ -105,3 +108,23 @@ replaceBoycottItemsFromAnOrder(Customer, OrderID,NewList):-
 calcPriceAfterReplacingBoycottItemsFromAnOrder(Customer, OrderID, NewList, TotalPrice) :-
     replaceBoycottItemsFromAnOrder(Customer, OrderID, NewList), % replace the boycott items
     calcPriceOfItems(NewList, 0, TotalPrice). % calculate the price of the new list
+
+
+% Insert/Remove (1)item, (2)alternative and (3)new boycott
+add_item(Item, Company, Price) :-
+    assert(item(Item, Company, Price)).
+
+remove_item(Item, Company, Price) :-
+    retract(item(Item, Company, Price)).
+
+add_alternative(Item, Alt) :-
+    assert(alternative(Item, Alt)).
+
+remove_alternative(Item, Alt) :-
+    retract(alternative(Item, Alt)).
+
+add_boycott_company(Company, Justification) :-
+    assert(boycott_company(Company, Justification)).
+
+remove_boycott_company(Company, Justification) :-
+    retract(boycott_company(Company, Justification)).
