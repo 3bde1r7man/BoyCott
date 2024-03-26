@@ -109,6 +109,11 @@ calcPriceAfterReplacingBoycottItemsFromAnOrder(Customer, OrderID, NewList, Total
     replaceBoycottItemsFromAnOrder(Customer, OrderID, NewList), % replace the boycott items
     calcPriceOfItems(NewList, 0, TotalPrice). % calculate the price of the new list
 
+%This function calculates the price difference between the boycott item and its alternative.
+getTheDifferenceInPriceBetweenItemAndAlternative(Item,Alternative,DiffPrice):-
+    alternative(Item, Alternative),!, item(Item, _, P),
+    item(Alternative, _, P1),DiffPrice is P - P1.
+
 
 % Insert/Remove (1)item, (2)alternative and (3)new boycott
 add_item(Item, Company, Price) :-
