@@ -1,6 +1,6 @@
 ### Repository: Customer Orders Management System
 
-This repository contains a Prolog program for managing customer orders, items, boycott companies, and their alternatives. Below are the details of the predicates and their functionalities:
+This repository contains a Prolog program for managing customer orders, items, boycott companies, and their alternatives.
 
 ### Contributors:
 - [Abdelrhman Mostafa](https://github.com/3bde1r7man)
